@@ -1,46 +1,55 @@
-const loginIDForm = document.querySelector('#loginID') ;
-const passwordForm = document.querySelector('#password') ;
-const loginButton = document.querySelector('#LoginButton') ;
-const clearButton = document.querySelector('#ClearButton') ;
-const completeForm = document.querySelector('#loginFormText') ;
-
+var loginButton = document.getElementById('LoginButton') ;
+var clearButton = document.getElementById('ClearButton') ;
+var completeForm = document.getElementById('loginFormText') ;
+var loginIDForm = document.getElementById('loginID') ;
+var passwordForm = document.getElementById('password') ;
+ 
 loginButton.addEventListener('click',validate) ;
+clearButton.addEventListener('click',resetForm) ;
+
+function invalidPassword(inputtxt) 
+{ 
+    var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if(inputtxt.match(decimal)) return false;
+    else return true;
+} 
+function InvalidEmail(mail) 
+{
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/.test(mail))
+    {
+        return false;
+    }
+    return true;
+}
 
 function validate(event){
-    event.preventDefault() ;
-    //console.log(loginIDForm.length)
-    if(loginIDForm.value.length == 0 ){
-        /*
+    if((loginIDForm.value.length == 0 ) || (isNaN(loginIDForm.value) && InvalidEmail(loginIDForm.value))){
         loginIDForm.focus() ;
-        var errorMessage = document.createElement('p')
-        var errorTextNode = document.createTextNode('Login ID Field Empty') ;
-        errorMessage.appendChild(errorTextNode) ;
-        errorMessage.style.color = 'rgba(255,0,0,.5)' ;
-        errorMessage.style.display = 'inline-block' ;
-        loginIDForm.style.border = "2px solid rgba(255,0,0,.5)" ;
-        insertAfter(errorMessage,loginIDForm) ;
+        loginIDForm.style.border = "3px solid Tomato";
+        loginIDForm.placeholder = "Enter Valid LoginID";
+        loginIDForm.value = "";
         setTimeout(function(){
             loginIDForm.style.border = "" ;
-            completeForm.removeChild(errorMessage) ;
-        },2000) ;
-        */
+            loginIDForm.placeholder = "";
+        },3000) ;
+        return false;
     }
-    else if(passwordForm.value.length == 0){
-        /*
+    else if(passwordForm.value.length === 0 || invalidPassword(passwordForm.value)){
         passwordForm.focus() ;
-        var errorMessage = document.createElement('P')
-        var errorTextNode = document.createTextNode('Password Field Empty') ;
-        errorMessage.appendChild(errorTextNode) ;
-        errorMessage.style.color = 'rgba(255,0,0,.5)' ;
-        errorMessage.style.display = 'inline-block' ;
-        passwordForm.style.border = "2px solid rgba(255,0,0,.5)" ;
-        insertAfter(errorMessage,passwordForm) ;
+        passwordForm.style.border = "3px solid Tomato";
+        passwordForm.placeholder = "Enter Valid Password";
+        passwordForm.value = "";
         setTimeout(function(){
             passwordForm.style.border = "" ;
-        },2000) ;
-        completeForm.removeChild(errorMessage) ;
-        */
+            passwordForm.placeholder = "";
+        },3000) ;
+        return false;
     }
+}
+
+function resetForm(event)
+{
+    completeForm.reset() ;
 }
 
 window.onload = function(event){

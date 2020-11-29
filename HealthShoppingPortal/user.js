@@ -1,5 +1,4 @@
 var registerButton = document.getElementById('RegisterButton') ;
-var clearButton = document.getElementById('ClearButton') ;
 var completeForm = document.getElementById('registrationForm') ;
 var nameForm = document.getElementById('name') ;
 var phoneForm = document.getElementById('phone') ;
@@ -12,7 +11,6 @@ var pincodeForm = document.getElementById('pincode') ;
 var emailForm = document.getElementById('email') ;
 
 registerButton.addEventListener('click',validate) ;
-clearButton.addEventListener('click',resetForm) ;
 
 function hasNumber(myString) {
     return /\d/.test(myString);
@@ -138,15 +136,6 @@ function validate(event){
     else{
         console.log('Success');
     }
-}
-
-function resetForm(event)
-{
-    completeForm.reset() ;
-}
-
-window.onload = function(event){
-    completeForm.reset() ;
 }
 
 function insertAfter(newNode, referenceNode) {
