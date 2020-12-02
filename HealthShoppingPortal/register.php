@@ -1,7 +1,16 @@
 
 <?php
-    require_once "pdo.php";
-    session_start();
+     session_start();
+     require_once "pdo.php";
+    if(isset($_SESSION["uname"]))
+    {
+      unset($_SESSION["uname"]);
+    }
+    if(isset($_SESSION["id_cust"]))
+    {
+      unset($_SESSION["id_cust"]);
+    }
+
     if(isset($_POST["RegisterButton"]))
 	  {	
       if(!( isset($_POST["name"]) && isset($_POST["phone"]) && isset($_POST["city"]) && isset($_POST["emailadd"]) && isset($_POST["state"])
@@ -97,7 +106,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Shopping Portal</title>
+    <title>Register Page</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style1.css"> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -110,7 +119,7 @@
         height: 100vh;
       }
       #formLogin{
-        height: 90%;
+        height: fit-content;
       }
     </style>
 
@@ -143,7 +152,7 @@
           <form id='registrationForm' name ='loginFormValid' onsubmit="return validate()" method="POST" >
           <?php
           if ( isset($_SESSION['error']) ) {
-            echo('<div class="alert alert-danger" role="alert" style="display: block;  width: 60%; margin: 0px auto 0px auto;">');
+            echo('<div class="alert alert-danger" id="registerAlert" role="alert" style="display: block;  width: 60%; margin: 0px auto 0px auto;">');
             echo(htmlentities($_SESSION['error'])."&#128533;</p></div>\n");
             unset($_SESSION['error']);
           }

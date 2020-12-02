@@ -63,7 +63,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Shopping Portal</title>
+    <title>Login Page</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style1.css"> </link>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -97,12 +97,12 @@
         <span id='loginSpan'>Log In</span>
         <?php
           if ( isset($_SESSION['error']) ) {
-            echo('<div class="alert alert-danger" role="alert" style="display: block;  width: 60%; margin: 0px auto 0px auto;">');
+            echo('<div class="alert alert-danger" id="errorDiv" role="alert" style="display: block;  width: 60%; margin: 0px auto 0px auto;">');
             echo(htmlentities($_SESSION['error'])."&#128533;</p></div>\n");
             unset($_SESSION['error']);
           }
           if ( isset($_SESSION['success']) ) {
-            echo('<div class="alert alert-success" role="alert" style="display: block;  width: 60%; margin: 0px auto 0px auto;">');
+            echo('<div class="alert alert-success" id="successDiv" role="alert" style="display: block;  width: 60%; margin: 0px auto 0px auto;">');
             echo(htmlentities($_SESSION['success'])."&#128516;</p></div>\n");
             unset($_SESSION['success']);
           }
@@ -125,7 +125,7 @@
           <button type="reset" class="btn btn-secondary" id="ClearButton">Clear</button>
           <div style="margin-top: 20px;">
           <span>Don't have an account? </span>
-          <a href="register.html" id="linkRegister">Register</a>
+          <a href="register.php" id="linkRegister">Register</a>
           </div>
         </form>
     </div>

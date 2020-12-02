@@ -4,7 +4,7 @@
     if(!(isset($_SESSION["id_cust"])))
     {
       session_destroy();
-      die('<div style="display: block; font-size: 1.5em; width: 20%; margin: 0px auto 0px auto;">Please log in to continue shopping!&#128533;</div>');
+      die('<div style="display: id="sessionMessage" block; font-size: 1.5em; width: 20%; margin: 0px auto 0px auto;">Please log in to continue shopping!&#128533;</div>');
     }
     if(isset($_POST["addToCart"]))
     {
@@ -36,8 +36,6 @@
           {
             $_SESSION["error"] = "Can't find the product in database.";
           }
-          header("Location: products.php");
-          return;
         }
         else{
           $_SESSION["error"] = 'Product name is mandatory.';
@@ -46,13 +44,15 @@
       else{
         $_SESSION["error"] = 'Product quantity must be greater than 1.';
       }
+          header("Location: products.php");
+    return;
     }
 ?>
 <!Doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Shopping Portal</title>
+    <title>Products Page</title>
     <link rel="stylesheet" href="style.css"> </link>
     <link rel="stylesheet" href="style2.css"> </link>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -71,7 +71,7 @@
 <body>
     <header>
     <nav class="navbar navbar-light">
-    <a class="navbar-brand" href="index.php">
+    <a class="navbar-brand" href="#">
       <img src="logo.PNG" id="logo" alt="Home" loading="lazy">
     </a>
 
@@ -115,12 +115,12 @@
       <div id="container">
         <?php
           if ( isset($_SESSION['error']) ) {
-            echo('<div class="alert alert-danger" role="alert" style="display: block; height:46px; top:10px; width: 60%; margin: 0px auto 0px auto;">');
+            echo('<div class="alert alert-danger" id="productsError" role="alert" style="display: block; height:46px; top:10px; width: 60%; margin: 0px auto 0px auto;">');
             echo(htmlentities($_SESSION['error'])."&#128533;</p></div>\n");
             unset($_SESSION['error']);
           }
           if ( isset($_SESSION['success']) ) {
-            echo('<div class="alert alert-success" role="alert" style="display: block; height:46px; top:10px; width: 60%; margin: 0px auto 0px auto;">');
+            echo('<div class="alert alert-success" id="productsSuccess" role="alert" style="display: block; height:46px; top:10px; width: 60%; margin: 0px auto 0px auto;">');
             echo(htmlentities($_SESSION['success'])."&#128516;</p></div>\n");
             unset($_SESSION['success']);
           }
@@ -191,6 +191,7 @@
             </div>   
           </div>
         </div>
+      </div>
       </div>
 
     

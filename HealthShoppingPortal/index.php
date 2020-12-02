@@ -1,3 +1,18 @@
+ <?php
+   session_start();
+   require_once "pdo.php";
+  if(isset($_SESSION["uname"]))
+  {
+    unset($_SESSION["uname"]);
+  }
+  if(isset($_SESSION["id_cust"]))
+  {
+    unset($_SESSION["id_cust"]);
+  }
+
+
+?>
+
 <!Doctype html>
 <html lang="en">
 <head>
